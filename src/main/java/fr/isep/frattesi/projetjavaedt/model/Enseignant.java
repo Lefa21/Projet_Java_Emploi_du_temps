@@ -8,9 +8,8 @@ import java.util.List;
 
 public class Enseignant extends Utilisateur {
     private String numeroEnseignant;
-    private Faculte faculteRattachement;
     private List<Cours> coursResponsable;
-    private List<Creneau> creneauxAssures;
+    private List<Cours> creneauxAssures;
 
 
     public Enseignant(String identifiantUtilisateur, String nom, String prenom, String email, String motDePasse, String numeroEnseignant) {
@@ -29,15 +28,6 @@ public class Enseignant extends Utilisateur {
         this.numeroEnseignant = numeroEnseignant;
     }
 
-
-    public Faculte getFaculteRattachement() {
-        return faculteRattachement;
-    }
-
-    public void setFaculteRattachement(Faculte faculteRattachement) {
-        this.faculteRattachement = faculteRattachement;
-    }
-
     public List<Cours> getCoursResponsable() {
         return coursResponsable;
     }
@@ -53,17 +43,17 @@ public class Enseignant extends Utilisateur {
 
 
 
-    public List<Creneau> getCreneauxAssures() {
+    public List<Cours> getCreneauxAssures() {
         return creneauxAssures;
     }
-    public void addCreneauAssure(Creneau creneau) {
-        if (creneau != null && !this.creneauxAssures.contains(creneau)) {
-            this.creneauxAssures.add(creneau);
+    public void addCreneauAssure(Cours cours) {
+        if (cours != null && !this.creneauxAssures.contains(cours)) {
+            this.creneauxAssures.add(cours);
             // Optionnel: if (creneau.getEnseignant() != this) creneau.setEnseignant(this);
         }
     }
-    public void removeCreneauAssure(Creneau creneau) {
-        this.creneauxAssures.remove(creneau);
+    public void removeCreneauAssure(Cours cours) {
+        this.creneauxAssures.remove(cours);
     }
 
 
@@ -72,7 +62,7 @@ public class Enseignant extends Utilisateur {
     public EmploiDuTemps consulterEmploiDuTemps(Date dateDebut, Date dateFin) {
         System.out.println("L'enseignant " + getPrenom() + " " + getNom() + " consulte son emploi du temps.");
         EmploiDuTemps edt = new EmploiDuTemps("edt_enseignant_" + super.getIdUtilisateur(), "Emploi du temps pour " + getNom(), new Date(), new Date(), "semaine");
-        for (Creneau creneau : this.creneauxAssures) {
+        for (Cours cours : this.creneauxAssures) {
         }
         return edt;
     }

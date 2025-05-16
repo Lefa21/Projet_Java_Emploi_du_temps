@@ -13,4 +13,6 @@ module fr.isep.frattesi.projetjavaedt {
 
     opens fr.isep.frattesi.projetjavaedt to javafx.fxml;
     exports fr.isep.frattesi.projetjavaedt;
+    exports fr.isep.frattesi.projetjavaedt.controller;
+    opens fr.isep.frattesi.projetjavaedt.controller to javafx.fxml;
 }

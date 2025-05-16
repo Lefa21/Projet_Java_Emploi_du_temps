@@ -1,17 +1,21 @@
 package fr.isep.frattesi.projetjavaedt.model;
 
+import fr.isep.frattesi.projetjavaedt.model.enums.TypeNotification;
+
+import java.util.Date;
+
 public class Notification {
     private String identifiantNotification;
     private String message;
     private Date dateEnvoi;
-    private EnumTypeNotification typeNotification;
+    private TypeNotification typeNotification;
     private boolean estLue;
 
     // Relations
     private Utilisateur destinataire;
     private Utilisateur emetteur;
 
-    public Notification(String identifiantNotification, String message, EnumTypeNotification typeNotification, Utilisateur destinataire) {
+    public Notification(String identifiantNotification, String message, TypeNotification typeNotification, Utilisateur destinataire) {
         this.identifiantNotification = identifiantNotification;
         this.message = message;
         this.typeNotification = typeNotification;
@@ -45,15 +49,15 @@ public class Notification {
         this.dateEnvoi = dateEnvoi;
     }
 
-    public EnumTypeNotification getTypeNotification() {
+    public TypeNotification getTypeNotification() {
         return typeNotification;
     }
 
-    public void setTypeNotification(EnumTypeNotification typeNotification) {
+    public void setTypeNotification(TypeNotification typeNotification) {
         this.typeNotification = typeNotification;
     }
 
-    public boolean isEstLue() {
+    public boolean getEstLue() {
         return estLue;
     }
 

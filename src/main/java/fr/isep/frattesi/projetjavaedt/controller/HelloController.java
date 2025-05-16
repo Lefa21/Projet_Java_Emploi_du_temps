@@ -1,4 +1,4 @@
-package fr.isep.frattesi.projetjavaedt;
+package fr.isep.frattesi.projetjavaedt.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

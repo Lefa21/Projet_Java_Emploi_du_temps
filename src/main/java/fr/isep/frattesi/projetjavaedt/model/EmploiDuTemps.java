@@ -14,8 +14,7 @@ public class EmploiDuTemps {
     private String typeAffichage;
 
 
-    private List<Creneau> creneauxInclus;
-    private Promotion promotionConcernee;
+    private List<Cours> creneauxIncluses;
 
 
     public EmploiDuTemps(String identifiantEdt, String titre, Date dateDebutValidite, Date dateFinValidite, String typeAffichage) {
@@ -24,7 +23,7 @@ public class EmploiDuTemps {
         this.dateDebutValidite = dateDebutValidite;
         this.dateFinValidite = dateFinValidite;
         this.typeAffichage = typeAffichage;
-        this.creneauxInclus = new ArrayList<>();
+        this.creneauxIncluses = new ArrayList<>();
     }
 
     // Getters et Setters
@@ -68,26 +67,18 @@ public class EmploiDuTemps {
         this.typeAffichage = typeAffichage;
     }
 
-    public List<Creneau> getCreneauxInclus() {
-        return creneauxInclus;
+    public List<Cours> getCreneauxInclus() {
+        return creneauxIncluses;
     }
 
-    public void addCreneau(Creneau creneau) {
-        if (creneau != null && !this.creneauxInclus.contains(creneau)) {
-            this.creneauxInclus.add(creneau);
+    public void addCreneau(Cours cours) {
+        if (cours != null && !this.creneauxIncluses.contains(cours)) {
+            this.creneauxIncluses.add(cours);
         }
     }
 
-    public void removeCreneauHoraire(Creneau creneau) {
-        this.creneauxInclus.remove(creneau);
-    }
-
-    public Promotion getPromotionConcernee() {
-        return promotionConcernee;
-    }
-
-    public void setPromotionConcernee(Promotion promotionConcernee) {
-        this.promotionConcernee = promotionConcernee;
+    public void removeCreneauHoraire(Cours cours) {
+        this.creneauxIncluses.remove(cours);
     }
 
     // Méthodes du diagramme
@@ -97,10 +88,10 @@ public class EmploiDuTemps {
         return "Affichage de l'EDT pour la vue: " + vue + " [Contenu à implémenter]";
     }
 
-    public List<Creneau> filtrerCreneaux(Map<String, String> criteres) {
+    public List<Cours> filtrerCreneaux(Map<String, String> criteres) {
         System.out.println("Filtrage des créneaux de l'EDT " + identifiantEdt);
         // Logique pour filtrer les créneaux basés sur les critères
-        List<Creneau> creneauxFiltres = new ArrayList<>();
+        List<Cours> creneauxFiltres = new ArrayList<>();
         // Exemple de critère: criteres.get("jour") == "Lundi"
         // Parcourir this.creneauxInclus et ajouter à creneauxFiltres si les critères correspondent
         return creneauxFiltres;

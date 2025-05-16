@@ -18,7 +18,7 @@ public class Conflit {
     private Utilisateur signalePar;
     private Salle salleConcernee;
 
-    private List<Creneau> creneauxImpliques;
+    private List<Cours> creneauxImpliques;
 
     public Conflit(String identifiantConflit, TypeConflit typeConflit, String descriptionDetailee, Utilisateur signalePar) {
         this.identifiantConflit = identifiantConflit;
@@ -95,16 +95,16 @@ public class Conflit {
         this.salleConcernee = salleConcernee;
     }
 
-    public List<Creneau> getCreneauxImpliques() {
+    public List<Cours> getCreneauxImpliques() {
         return creneauxImpliques;
     }
 
-    public void addCreneauImplique(Creneau creneau) {
-        if (creneau != null && !this.creneauxImpliques.contains(creneau)) {
-            this.creneauxImpliques.add(creneau);
+    public void addCreneauImplique(Cours cours) {
+        if (cours != null && !this.creneauxImpliques.contains(cours)) {
+            this.creneauxImpliques.add(cours);
         }
     }
-    public void removeCreneauImplique(Creneau creneau) {
-        this.creneauxImpliques.remove(creneau);
+    public void removeCreneauImplique(Cours cours) {
+        this.creneauxImpliques.remove(cours);
     }
 }

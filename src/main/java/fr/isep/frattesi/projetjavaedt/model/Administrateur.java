@@ -3,7 +3,6 @@ package fr.isep.frattesi.projetjavaedt.model;
 import fr.isep.frattesi.projetjavaedt.model.enums.TypeRole;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 public class Administrateur extends Utilisateur {
 
@@ -22,7 +21,7 @@ public class Administrateur extends Utilisateur {
     }
 
     public boolean gererUtilisateur(Utilisateur utilisateur, String action, Map<String, String> details) {
-        System.out.println("Admin " + getNom() + " effectue l'action '" + action + "' sur l'utilisateur: " + utilisateur.getIdentifiantUtilisateur());
+        System.out.println("Admin " + getNom() + " effectue l'action '" + action + "' sur l'utilisateur: ");
         return true;
     }
 
@@ -38,10 +37,10 @@ public class Administrateur extends Utilisateur {
         return true;
     }
 
-    public boolean affecterEnseignantACreneau(Enseignant enseignant, Creneau creneau) {
-        System.out.println("Admin " + getNom() + " affecte l'enseignant " + enseignant.getNom() + " au créneau " + creneau.getIdentifiantCreneau());
-        if (enseignant != null && creneau != null) {
-            creneau.setEnseignant(enseignant);
+    public boolean affecterEnseignantACreneau(Enseignant enseignant, Cours cours) {
+        System.out.println("Admin " + getNom() + " affecte l'enseignant " + enseignant.getNom() + " au créneau " + cours.getIdentifiantCreneau());
+        if (enseignant != null && cours != null) {
+            cours.setEnseignant(enseignant);
             return true;
         }
         return false;
@@ -54,18 +53,6 @@ public class Administrateur extends Utilisateur {
 
     public boolean gererEquipement(Equipement equipement, String action, Map<String, String> details) {
         System.out.println("Admin " + getNom() + " effectue l'action '" + action + "' sur l'équipement: " + (equipement != null ? equipement.getIdEquipement() : "nouvel équipement"));
-        return true;
-    }
-
-
-    public boolean gererFaculte(Faculte faculte, String action, Map<String, String> details) {
-        System.out.println("Admin " + getNom() + " effectue l'action '" + action + "' sur la faculté: " + (faculte != null ? faculte.getIdFaculte() : "nouvelle faculté"));
-        return true;
-    }
-
-
-    public boolean gererPromotion(Promotion promotion, String action, Map<String, String> details) {
-        System.out.println("Admin " + getNom() + " effectue l'action '" + action + "' sur la promotion: " + (promotion != null ? promotion.getIdentifiantPromotion() : "nouvelle promotion"));
         return true;
     }
 
