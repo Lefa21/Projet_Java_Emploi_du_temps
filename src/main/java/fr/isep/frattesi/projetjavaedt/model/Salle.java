@@ -67,7 +67,7 @@ public class Salle {
     }
 
     public boolean verifierDisponibilitePourCreneau(Cours cours) {
-        System.out.println("Vérification de la disponibilité de la salle " + numeroSalle + " pour le créneau " + cours.getIdentifiantCreneau());
+        System.out.println("Vérification de la disponibilité de la salle " + numeroSalle + " pour le créneau " + cours.getidCours());
         return this.estDisponible; // Simplifié
     }
 
