@@ -18,8 +18,7 @@ public class Cours {
     private String nomMatiere;
     private String description;
 
-    // Relation avec Conflit (un créneau peut être impliqué dans plusieurs conflits)
-    private List<Conflit> conflitsImpliques;
+
 
     public Cours(String idCours, Date jourDate, Date heureDebut, Date heureFin, String typeCours, String nomMatiere, String description) {
         this.idCours = idCours;
@@ -27,21 +26,16 @@ public class Cours {
         this.heureDebut = heureDebut;
         this.heureFin = heureFin;
         this.typeCours = typeCours;
-        this.conflitsImpliques = new ArrayList<>();
         this.nomMatiere = nomMatiere;
         this.description = description;
     }
 
     // Getters et Setters
-    public String getidCours() {
+    public String getIdCours() {
         return idCours;
     }
 
-    public void setIdentifiantCreneau(String identifiantCreneau) {
-        this.idCours = identifiantCreneau;
-    }
-
-    public Date getJourDate() {
+     public Date getJourDate() {
         return jourDate;
     }
 
@@ -95,19 +89,6 @@ public class Cours {
 
     public void setSalleUtilisee(Salle salleUtilisee) {
         this.salleUtilisee = salleUtilisee;
-    }
-
-    public List<Conflit> getConflitsImpliques() {
-        return conflitsImpliques;
-    }
-
-    public void addConflitImplique(Conflit conflit) {
-        if (conflit != null && !this.conflitsImpliques.contains(conflit)) {
-            this.conflitsImpliques.add(conflit);
-        }
-    }
-    public void removeConflitImplique(Conflit conflit) {
-        this.conflitsImpliques.remove(conflit);
     }
 
 

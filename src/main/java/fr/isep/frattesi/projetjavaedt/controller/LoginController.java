@@ -2,27 +2,22 @@ package fr.isep.frattesi.projetjavaedt.controller;
 
 import fr.isep.frattesi.projetjavaedt.EmploiDuTempsAPP;
 import fr.isep.frattesi.projetjavaedt.model.Utilisateur;
-import fr.isep.frattesi.projetjavaedt.model.enums.TypeRole; // Utilisation de votre enum
+import fr.isep.frattesi.projetjavaedt.model.enums.TypeRole; // Assurez-vous que cette enum existe et est correctement nommée
 import fr.isep.frattesi.projetjavaedt.service.AuthentificationService;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert; // Pour les messages d'alerte
 import java.io.IOException;
 
 public class LoginController {
 
     @FXML
     private TextField identifiantField;
-
     @FXML
     private PasswordField motDePasseField;
-
-    @FXML
-    private Button connexionButton; // Peut être retiré si non utilisé directement
-
     @FXML
     private Label messageLabel;
 
@@ -46,26 +41,29 @@ public class LoginController {
         Utilisateur utilisateurConnecte = authentificationService.authentifier(identifiant, motDePasse);
 
         if (utilisateurConnecte != null) {
-            messageLabel.setText("Connexion réussie: " + utilisateurConnecte.getPrenom() + " " + utilisateurConnecte.getNom());
+            EmploiDuTempsAPP.setCurrentUser(utilisateurConnecte); // Définir l'utilisateur courant
+
+            messageLabel.setText("Connexion réussie: " + utilisateurConnecte.getPrenom());
             messageLabel.setStyle("-fx-text-fill: green;");
 
             try {
                 if (utilisateurConnecte.getTypeRole() == TypeRole.ADMINISTRATEUR) {
-                    EmploiDuTempsAPP.loadScene("DashboardAdminView.fxml", "Tableau de Bord Admin", 800, 600);
+                    EmploiDuTempsAPP.loadScene("DashboardAdminView.fxml", "Tableau de Bord Admin", 900, 700);
                 } else if (utilisateurConnecte.getTypeRole() == TypeRole.ETUDIANT) {
                     // EmploiDuTempsAPP.loadScene("DashboardEtudiantView.fxml", "Tableau de Bord Étudiant", 800, 600);
-                    messageLabel.setText("Vue Étudiant à implémenter. Connecté en tant que: " + utilisateurConnecte.getPrenom());
+                    afficherAlerte(Alert.AlertType.INFORMATION, "Accès Étudiant", "Vue Étudiant à implémenter. Connecté en tant que: " + utilisateurConnecte.getPrenom());
                 } else if (utilisateurConnecte.getTypeRole() == TypeRole.ENSEIGNANT) {
                     // EmploiDuTempsAPP.loadScene("DashboardEnseignantView.fxml", "Tableau de Bord Enseignant", 800, 600);
-                    messageLabel.setText("Vue Enseignant à implémenter. Connecté en tant que: " + utilisateurConnecte.getPrenom());
+                    afficherAlerte(Alert.AlertType.INFORMATION, "Accès Enseignant", "Vue Enseignant à implémenter. Connecté en tant que: " + utilisateurConnecte.getPrenom());
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                messageLabel.setText("Erreur lors du chargement de la vue suivante.");
+                messageLabel.setText("Erreur lors du chargement de la vue suivante: " + e.getMessage());
                 messageLabel.setStyle("-fx-text-fill: red;");
+                afficherAlerte(Alert.AlertType.ERROR, "Erreur de chargement", "Impossible de charger la vue suivante.");
             }
-
         } else {
+            EmploiDuTempsAPP.setCurrentUser(null);
             messageLabel.setText("Identifiant ou mot de passe incorrect.");
             messageLabel.setStyle("-fx-text-fill: red;");
         }
@@ -74,5 +72,13 @@ public class LoginController {
     @FXML
     public void initialize() {
         messageLabel.setText("");
+    }
+
+    private void afficherAlerte(Alert.AlertType alertType, String title, String content) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }

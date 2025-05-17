@@ -2,6 +2,9 @@ package fr.isep.frattesi.projetjavaedt.model;
 
 import fr.isep.frattesi.projetjavaedt.model.enums.TypeRole; // Assurez-vous que cette énumération est bien définie
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 /**
@@ -70,31 +73,19 @@ public abstract class Utilisateur {
         this.email = email;
     }
 
-    /**
-     * Définit le mot de passe de l'utilisateur.
-     * Le mot de passe fourni en clair sera haché avant stockage.
-     * @param motDePasseEnClair Le nouveau mot de passe en clair.
-     */
-    public void setMotDePasse(String motDePasseEnClair) {
-        this.motDePasse = hashPassword(motDePasseEnClair); // Hachage lors de la modification
-    }
 
     public void setTypeRole(TypeRole typeRole) {
         this.typeRole = typeRole;
     }
 
-    // Méthodes du diagramme
-    /**
-     * Tente d'authentifier l'utilisateur.
-     * @param identifiant L'identifiant fourni.
-     * @param motDePasseEnClair Le mot de passe en clair fourni.
-     * @return true si l'authentification réussit, false sinon.
-     */
+    public void setMotDePasse(String motDePasseEnClair) {
+        this.motDePasse = hashPassword(motDePasseEnClair); // Appelle la nouvelle méthode hashPassword
+    }
+
     public boolean seConnecter(String identifiant, String motDePasseEnClair) {
-        System.out.println("Tentative d'authentification pour : " + identifiant);
-        // Compare l'identifiant et le hash du mot de passe fourni avec le hash stocké
         return this.idUtilisateur.equals(identifiant) && this.motDePasse.equals(hashPassword(motDePasseEnClair));
     }
+
 
     public void seDeconnecter(){
         System.out.println("Utilisateur " + this.prenom + " " + this.nom + " se déconnecte.");
@@ -109,8 +100,37 @@ public abstract class Utilisateur {
      * @return Une version "hachée" (simulée) du mot de passe.
      */
     private String hashPassword(String password) {
-        if (password == null) return null;
-        return "hashed_" + password; // Simulation de hachage
+        if (password == null) {
+            return null;
+        }
+        try {
+            // Créer une instance de MessageDigest pour SHA-256
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+
+            // Obtenir les bytes du mot de passe (en UTF-8)
+            byte[] encodedhash = digest.digest(
+                    password.getBytes(StandardCharsets.UTF_8));
+
+            // Convertir le tableau de bytes en une représentation hexadécimale
+            StringBuilder hexString = new StringBuilder(2 * encodedhash.length);
+            for (int i = 0; i < encodedhash.length; i++) {
+                String hex = Integer.toHexString(0xff & encodedhash[i]);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            // Cette exception ne devrait pas se produire si SHA-256 est un algorithme standard
+            System.err.println("Erreur critique: Algorithme de hachage SHA-256 non trouvé.");
+            e.printStackTrace();
+            // En cas d'erreur, vous pourriez retourner null ou lever une RuntimeException
+            // pour indiquer un problème de configuration grave.
+            // Retourner le mot de passe en clair ou un hash simple serait une mauvaise idée.
+            throw new RuntimeException("Impossible de hacher le mot de passe.", e);
+        }
     }
 
     /**
@@ -132,6 +152,10 @@ public abstract class Utilisateur {
 
     public String consulterProfil() {
         return "Profil de " + prenom + " " + nom + " (" + typeRole + ")";
+    }
+
+    public void setMotDePasseDirectHash(String motDePasseHash) {
+        this.motDePasse = motDePasseHash;
     }
 
     public abstract EmploiDuTemps consulterEmploiDuTemps(Date dateDebut, Date dateFin);

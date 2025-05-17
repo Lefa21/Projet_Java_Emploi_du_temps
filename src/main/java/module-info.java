@@ -10,6 +10,7 @@ module fr.isep.frattesi.projetjavaedt {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.sql;
 
     opens fr.isep.frattesi.projetjavaedt to javafx.fxml;
     exports fr.isep.frattesi.projetjavaedt;

@@ -14,7 +14,8 @@ public class EmploiDuTemps {
     private String typeAffichage;
 
 
-    private List<Cours> creneauxIncluses;
+    private List<Cours> coursInclus;
+     private List<Conflit> conflitsImpliques;
 
 
     public EmploiDuTemps(String identifiantEdt, String titre, Date dateDebutValidite, Date dateFinValidite, String typeAffichage) {
@@ -23,7 +24,8 @@ public class EmploiDuTemps {
         this.dateDebutValidite = dateDebutValidite;
         this.dateFinValidite = dateFinValidite;
         this.typeAffichage = typeAffichage;
-        this.creneauxIncluses = new ArrayList<>();
+        this.conflitsImpliques = new ArrayList<>();
+        this.coursInclus = new ArrayList<>();
     }
 
     // Getters et Setters
@@ -68,17 +70,31 @@ public class EmploiDuTemps {
     }
 
     public List<Cours> getCreneauxInclus() {
-        return creneauxIncluses;
+        return coursInclus;
     }
 
     public void addCreneau(Cours cours) {
-        if (cours != null && !this.creneauxIncluses.contains(cours)) {
-            this.creneauxIncluses.add(cours);
+        if (cours != null && !this.coursInclus.contains(cours)) {
+            this.coursInclus.add(cours);
         }
     }
 
-    public void removeCreneauHoraire(Cours cours) {
-        this.creneauxIncluses.remove(cours);
+    public void removeCours(Cours cours) {
+        this.coursInclus.remove(cours);
+    }
+
+
+    public List<Conflit> getConflitsImpliques() {
+        return conflitsImpliques;
+    }
+
+    public void addConflitImplique(Conflit conflit) {
+        if (conflit != null && !this.conflitsImpliques.contains(conflit)) {
+            this.conflitsImpliques.add(conflit);
+        }
+    }
+    public void removeConflitImplique(Conflit conflit) {
+        this.conflitsImpliques.remove(conflit);
     }
 
     // Méthodes du diagramme
@@ -88,13 +104,13 @@ public class EmploiDuTemps {
         return "Affichage de l'EDT pour la vue: " + vue + " [Contenu à implémenter]";
     }
 
-    public List<Cours> filtrerCreneaux(Map<String, String> criteres) {
+    public List<Cours> filtrerCours(Map<String, String> criteres) {
         System.out.println("Filtrage des créneaux de l'EDT " + identifiantEdt);
         // Logique pour filtrer les créneaux basés sur les critères
-        List<Cours> creneauxFiltres = new ArrayList<>();
+        List<Cours> coursFiltres = new ArrayList<>();
         // Exemple de critère: criteres.get("jour") == "Lundi"
         // Parcourir this.creneauxInclus et ajouter à creneauxFiltres si les critères correspondent
-        return creneauxFiltres;
+        return coursFiltres;
     }
 
     public File exporter(String format) {

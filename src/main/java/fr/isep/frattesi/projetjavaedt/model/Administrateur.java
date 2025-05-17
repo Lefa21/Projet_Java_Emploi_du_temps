@@ -37,8 +37,8 @@ public class Administrateur extends Utilisateur {
         return true;
     }
 
-    public boolean affecterEnseignantACreneau(Enseignant enseignant, Cours cours) {
-        System.out.println("Admin " + getNom() + " affecte l'enseignant " + enseignant.getNom() + " au créneau " + cours.getidCours());
+    public boolean affecterEnseignantACours(Enseignant enseignant, Cours cours) {
+        System.out.println("Admin " + getNom() + " affecte l'enseignant " + enseignant.getNom() + " au créneau " + cours.getIdCours());
         if (enseignant != null && cours != null) {
             cours.setEnseignantResponsable(enseignant);
             return true;

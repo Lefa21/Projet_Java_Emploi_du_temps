@@ -1,14 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="fr.isep.frattesi.projetjavaedt.view.DashboardAdminView"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.isep.frattesi.projetjavaedt.controller.DashboardAdministrateurController">
+    <top>
+        <MenuBar BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="Fichier">
+                    <items>
+                        <MenuItem fx:id="menuItemDeconnexion" mnemonicParsing="false" onAction="#seDeconnecter" text="Déconnexion" /> </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Aide">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="À propos" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <left>
+        <VBox prefHeight="675.0" prefWidth="220.0" spacing="10.0" style="-fx-background-color: #f0f0f0; -fx-border-color: #cccccc;" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+            <children>
+                <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Menu Administrateur">
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin>
+                </Label>
+                <Button fx:id="btnGestionSalles" mnemonicParsing="false" onAction="#gererSalles" prefWidth="200.0" text="Gestion des Salles" />
+                <Button fx:id="btnGestionEquipements" mnemonicParsing="false" onAction="#gererEquipements" prefWidth="200.0" text="Gestion des Équipements" />
+                <Button fx:id="btnGestionUtilisateurs" mnemonicParsing="false" onAction="#gererUtilisateurs" prefWidth="200.0" text="Gestion des Utilisateurs" />
+                <Button fx:id="btnGestionEmploisDuTemps" mnemonicParsing="false" onAction="#gererEmploisDuTemps" prefWidth="200.0" text="Gestion des Emplois du Temps" />
+                <Button fx:id="btnGestionCours" mnemonicParsing="false" onAction="#gererCours" prefWidth="200.0" text="Gestion des Cours" />
+                <Button fx:id="btnGestionConflits" mnemonicParsing="false" onAction="#gererGestionConflits" prefWidth="200.0" text="Gestion des Conflits" />
+                <Button fx:id="btnVoirStatistiques" mnemonicParsing="false" onAction="#gererStatistiques" prefWidth="200.0" text="Voir les Statistiques" />
+            </children>
+        </VBox>
+    </left>
+    <center>
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="welcomeLabel" style="-fx-font-size: 20px;" text="Bienvenue Administrateur!" />
+                <Label text="Sélectionnez une option dans le menu de gauche pour commencer." textAlignment="CENTER" wrapText="true" />
+            </children>
+            <BorderPane.margin>
+                <Insets />
+            </BorderPane.margin>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+        </VBox>
+    </center>
+</BorderPane>
